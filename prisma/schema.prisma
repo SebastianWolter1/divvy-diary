@@ -14,17 +14,15 @@ datasource db {
 model User {
   id    String  @default(cuid()) @id
   name  String
-  email String  
-  // @unique
-  // Define a relationship to UserValues
-  userValues UserValue[]
+  email String  @unique
+  password String
+  userValues PriceAlarms[]
 }
 
-model UserValue {
+model PriceAlarms {
   id       String  @default(cuid()) @id
-  isin     Int?
-  price    Int?
-  // Reference to the User model
+  isin     String
+  price    String
   userId   String
   user     User    @relation(fields: [userId], references: [id])
 }
