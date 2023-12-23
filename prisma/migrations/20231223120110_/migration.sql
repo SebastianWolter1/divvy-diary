@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "PriceAlarms" ALTER COLUMN "isin" SET DATA TYPE TEXT,
+ALTER COLUMN "price" SET DATA TYPE TEXT;
