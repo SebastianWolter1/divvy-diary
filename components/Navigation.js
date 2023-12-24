@@ -11,15 +11,24 @@ const Navigation = ({ isLoggedIn }) => {
       </div>
       <div>
         {isLoggedIn ? (
-          <Link href="/logout">Logout</Link>
+          <Link href="/auth/logout">Logout</Link>
         ) : (
           <div className="flex">
-            <Link className="px-2" href="/login">Login</Link>
-            <Link className="px-2" href="/register">Register</Link>
+            <Link className="px-2" href="/auth/login">
+              Login
+            </Link>
+            <Link className="px-2" href="/auth/register">
+              Register
+            </Link>
           </div>
         )}
       </div>
-      {isLoggedIn && <div> <span>Welcome, User!</span></div>}
+      {isLoggedIn && (
+        <div>
+          {" "}
+          <span>Welcome, User!</span>
+        </div>
+      )}
     </nav>
   );
 };

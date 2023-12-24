@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 
 const users = await prisma.user.findMany({
   where: {
-    name: "Seb",
+    name: "Test",
   },
   include: {
     userValues: true,
@@ -42,28 +42,3 @@ const Home = async () => {
 };
 
 export default Home;
-
-//     const addUser = await prisma.user.create({
-//       data: {
-//         name: "Seb",
-//         email: "seb@s.de",
-//       },
-//     });
-
-//     const existingUser = await prisma.user.findUnique({
-//       where: {
-//         id: "clqgwk61r000k9q188rmioy5h"
-//       },
-//     });
-
-//     console.log(existingUser);
-
-// if (existingUser) {
-//       const newUserData = await prisma.userValue.create({
-//         data: {
-//           isin: 432,
-//           price: 993,
-//           userId: existingUser.id,
-//         },
-//       });
-//     }
