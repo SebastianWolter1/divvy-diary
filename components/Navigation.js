@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Navigation = ({ isLoggedIn }) => {
   return (
-    <nav className="flex justify-between px-2 ">
+    <nav className="flex justify-between px-2 bg-gray-800 text-white">
       <div>
         <Link href="https://www.divvydiary.com/de">
           <Image src="/logo.svg" width={24} height={24} alt="divvyDiary" />

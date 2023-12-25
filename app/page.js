@@ -15,10 +15,9 @@ console.log(users);
 const Home = async () => {
   return (
     <>
-      <div className="h-screen bg-gray-900 text-white">
-        <main className="bg-gray-900 ">
-          <Navigation />
-          DivvyDiary
+      <div className="h-screen bg-gray-800 text-white">
+        <main className="">
+        
         </main>
         {users
           ? users.map((user) => (

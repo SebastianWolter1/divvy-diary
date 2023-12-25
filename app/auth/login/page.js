@@ -50,8 +50,10 @@ const LoginForm = () => {
           {alert.status === "success" ? "✅" : "❌"} {alert.message}
         </div>
       )}
+      <div className="bg-gray-800 h-screen p-6">
+
       <form
-        className="bg-gray-800 h-screen p-6"
+        
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mb-4">
@@ -96,15 +98,12 @@ const LoginForm = () => {
           )}
         </div>
 
-        <button
-          className="bg-orange-500 hover:bg-orange-600 text-gray-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
-          Login
-        </button>
+       <Cta type="loginForm" />
        
       </form>
         <Cta type="register" />
+      </div>
+
     </>
   );
 };
