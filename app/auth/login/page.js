@@ -6,6 +6,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Cta from '@/components/Cta';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -101,11 +102,9 @@ const LoginForm = () => {
         >
           Login
         </button>
-        <div>
-          Don't have an account?{" "}
-          <Link href="/auth/register">Register here</Link>
-        </div>
+       
       </form>
+        <Cta type="register" />
     </>
   );
 };

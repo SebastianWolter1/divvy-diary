@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import Cta from '@/components/Cta';
+
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -123,10 +125,10 @@ const RegisterForm = () => {
         >
           Register
         </button>
-        <div>
-          Already have an account? <Link href="/auth/login">Login here</Link>
-        </div>
+       
+
       </form>
+        <Cta type="login" />
     </>
   );
 };
