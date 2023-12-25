@@ -1,11 +1,10 @@
 import { getServerSession } from "next-auth/next";
 import prisma from "@/lib/prisma";
-import Link from "next/link";
-import Cta from '@/components/Cta';
+import Cta from "@/components/Cta";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-export const dynamic = 'force-dynamic';
-
-
+import FetchStocks from "@/lib/fetchStocks";
+import PriceAlarm from "@/components/PriceAlarms";
+export const dynamic = "force-dynamic";
 
 const getCurrentUser = async () => {
   try {
@@ -14,6 +13,7 @@ const getCurrentUser = async () => {
     if (!session?.user?.email) return;
     const currentUser = await prisma.user.findUnique({
       where: { email: session.user.email },
+      include: { userValues: true },
     });
     if (!currentUser) return;
     console.log({ currentUser });
@@ -23,19 +23,28 @@ const getCurrentUser = async () => {
   }
 };
 
+let company = null;
+const handleData = (data) => {
 
+  company =  data;
+  console.log(company.name);
+  // return company
+};
 
 const Dashboard = async () => {
   const user = await getCurrentUser();
-  console.log({ user });
+  console.log("rararara", user.userValues);
+
+
+
 
   if (!user)
     return (
       <>
         <div className="bg-gray-800 h-screen p-6 text-white">
           <h3>You are currently not logged in!</h3>
-          {/* <Link href="/auth/login">Login to my account</Link> */}
           <Cta type="login" />
+          <Cta type="register" />
         </div>
       </>
     );
@@ -45,9 +54,23 @@ const Dashboard = async () => {
       <div className="bg-gray-800 h-screen p-6 text-white">
         <h3>Name: {user.name}</h3>
         <p>Email: {user.email}</p>
+        {user.userValues.length ? (user.userValues.map((userValue) => (
+          <ul key={userValue.id}>
+            <li>ISIN: {userValue.isin}</li>
+            <li>Price: {userValue.price}</li>
+          </ul>
+        ))): null}
         <Cta type="logout" />
+        <FetchStocks onDataFetch={handleData} />
 
+        {company && (
+          <>
+            <h2>{company.name}</h2>
+            <p>{company.price}</p>
+          </>
+        )}
       </div>
+      <PriceAlarm user={user}/>
     </>
   );
 };
