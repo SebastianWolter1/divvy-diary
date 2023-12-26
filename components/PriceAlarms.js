@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import Cta from '@/components/Cta';
 
-const PriceAlarm = ({user}) => {
+const PriceAlarmForm = ({user}) => {
   console.log("PriceAlarm", user)
   const router = useRouter();
   const {
@@ -21,8 +21,6 @@ const PriceAlarm = ({user}) => {
   });
 
   const onSubmit = async (data) => {
-
-    console.log("onSubmit", data)
 
     try {
       await fetch("/api/auth/userValues", {
@@ -106,4 +104,4 @@ const PriceAlarm = ({user}) => {
   );
 };
 
-export default PriceAlarm;
+export default PriceAlarmForm;
