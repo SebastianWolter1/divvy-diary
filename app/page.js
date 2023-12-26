@@ -10,7 +10,7 @@ const users = await prisma.user.findMany({
   },
 });
 
-console.log(users);
+// console.log(users);
 
 const Home = async () => {
   return (

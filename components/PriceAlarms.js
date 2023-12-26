@@ -4,10 +4,9 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
-import Cta from '@/components/Cta';
+import Cta from "@/components/Cta";
 
-const PriceAlarmForm = ({user}) => {
-  console.log("PriceAlarm", user)
+const PriceAlarmForm = ({ user }) => {
   const router = useRouter();
   const {
     register,
@@ -21,7 +20,6 @@ const PriceAlarmForm = ({user}) => {
   });
 
   const onSubmit = async (data) => {
-
     try {
       await fetch("/api/auth/userValues", {
         method: "POST",
@@ -35,7 +33,6 @@ const PriceAlarmForm = ({user}) => {
       setTimeout(() => {
         router.refresh();
       }, 500);
-      
     } catch (error) {
       setAlert({ status: "error", message: "Something went wrong" });
     }
