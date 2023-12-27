@@ -4,7 +4,9 @@ import Cta from "@/components/Cta";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import FetchStocks from "@/lib/fetchStocks";
 import PriceAlarm from "@/components/PriceAlarms";
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+import React from "react";
+
 
 const getCurrentUser = async () => {
   try {
@@ -19,13 +21,6 @@ const getCurrentUser = async () => {
   } catch (error) {
     return;
   }
-};
-
-let company;
-const handleData =  (data) => {
-  company =  data;
-  console.log(company.name);
-  // return company;
 };
 
 const Dashboard = async () => {
@@ -51,25 +46,19 @@ const Dashboard = async () => {
         <p>Email: {user.email}</p>
         {user.userValues.length
           ? user.userValues.map((userValue) => (
-              <ul key={userValue.id}>
-                <li>ISIN: {userValue.isin}</li>
-                <li>Price: {userValue.price}</li>
+            <React.Fragment key={userValue.id}>
+              <ul >
+                <li>ISINUSER: {userValue.isin}</li>
+                <li>PriceUSER: {userValue.price}</li>
               </ul>
+              <FetchStocks userValues={user.userValues}  />
+              </React.Fragment>
             ))
           : null}
         <Cta type="logout" />
-        <FetchStocks onDataFetch={handleData} />
-
-        {company ? (
-          <>
-            <h2>{company.name}</h2>
-            <p>{company.price}</p>
-            <p>{company.isin}</p>
-
-          </>
-        ):null}
-      </div>
+    
       <PriceAlarm user={user} />
+      </div>
     </>
   );
 };
