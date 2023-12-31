@@ -6,6 +6,7 @@ import FetchStocks from "@/lib/fetchStocks";
 import PriceAlarm from "@/components/PriceAlarms";
 // export const dynamic = "force-dynamic";
 import React from "react";
+import Serviceworker from "@/components/ServiceWorker";
 
 
 const getCurrentUser = async () => {
@@ -26,7 +27,7 @@ const getCurrentUser = async () => {
 const Dashboard = async () => {
   // const user = await getCurrentUser();
 
-  const user = {name: "Test", email: "test@test.de", userValues: [{isin: "DE000A0D6554", price: 10.4}, {isin: "US5949181045", price: 100}]}
+  const user = {name: "Test", email: "test@test.de", userValues: [{isin: "DE000A0D6554", price: 10.4}, {isin: "US5949181045", price: 340.17}]}
 
   if (!user)
     return (
@@ -54,6 +55,7 @@ const Dashboard = async () => {
                 <li>PriceUSER: {userValue.price}</li>
               </ul>
               <FetchStocks userValues={user.userValues}  />
+              <Serviceworker />
               </React.Fragment>
             ))
           : null}
