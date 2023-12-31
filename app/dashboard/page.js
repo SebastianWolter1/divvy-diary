@@ -24,7 +24,9 @@ const getCurrentUser = async () => {
 };
 
 const Dashboard = async () => {
-  const user = await getCurrentUser();
+  // const user = await getCurrentUser();
+
+  const user = {name: "Test", email: "test@test.de", userValues: [{isin: "DE000A0D6554", price: 10.4}, {isin: "US5949181045", price: 100}]}
 
   if (!user)
     return (

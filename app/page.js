@@ -1,17 +1,17 @@
 import Navigation from "@/components/Navigation";
 import prisma from "@/lib/prisma";
 
-const users = await prisma.user.findMany({
-  where: {
-    name: "Test",
-  },
-  include: {
-    userValues: true,
-  },
-});
+// const users = await prisma.user.findMany({
+//   where: {
+//     name: "Test",
+//   },
+//   include: {
+//     userValues: true,
+//   },
+// });
 
 // console.log(users);
-
+let users
 const Home = async () => {
   return (
     <>
