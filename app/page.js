@@ -1,4 +1,3 @@
-import Navigation from "@/components/Navigation";
 import prisma from "@/lib/prisma";
 
 const users = await prisma.user.findMany({
@@ -10,15 +9,10 @@ const users = await prisma.user.findMany({
   },
 });
 
-// console.log(users);
-
 const Home = async () => {
   return (
     <>
       <div className="h-screen bg-gray-800 text-white">
-        <main className="">
-        
-        </main>
         {users
           ? users.map((user) => (
               <ul key={user.id}>
