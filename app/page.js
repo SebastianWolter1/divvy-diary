@@ -9,7 +9,6 @@ const users = await prisma.user.findMany({
   },
 });
 
-
 const Home = async () => {
   return (
     <>
