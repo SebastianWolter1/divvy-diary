@@ -1,12 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import { useState } from "react";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import Cta from '@/components/Cta';
+import Cta from "@/components/Cta";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -25,7 +24,6 @@ const LoginForm = () => {
   const onSubmit = async (data, e) => {
     e.preventDefault();
     const result = await signIn("credentials", { ...data, redirect: false });
-    console.log(result);
 
     if (result.ok) {
       console.log("helloo");
@@ -51,59 +49,53 @@ const LoginForm = () => {
         </div>
       )}
       <div className="bg-gray-800 h-screen p-6">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-4">
+            <label
+              className="block text-gray-200 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              {...register("email", { required: true })}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="email"
+              id="email"
+              name="email"
+            />
+            {errors.email && (
+              <span className="text-red-500 text-xs italic">
+                This field is required
+              </span>
+            )}
+          </div>
 
-      <form
-        
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className="mb-4">
-          <label
-            className="block text-gray-200 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            {...register("email", { required: true })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="email"
-            id="email"
-            name="email"
-          />
-          {errors.email && (
-            <span className="text-red-500 text-xs italic">
-              This field is required
-            </span>
-          )}
-        </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-200 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              {...register("password", { required: true })}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="password"
+              id="password"
+              name="password"
+            />
+            {errors.password && (
+              <span className="text-red-500 text-xs italic">
+                This field is required
+              </span>
+            )}
+          </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-200 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            {...register("password", { required: true })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="password"
-            id="password"
-            name="password"
-          />
-          {errors.password && (
-            <span className="text-red-500 text-xs italic">
-              This field is required
-            </span>
-          )}
-        </div>
-
-       <Cta type="loginForm" />
-       
-      </form>
+          <Cta type="loginForm" />
+        </form>
         <Cta type="register" />
       </div>
-
     </>
   );
 };

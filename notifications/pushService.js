@@ -20,10 +20,11 @@ export async function registerPushNotifications() {
 
   const subscription = await sw.pushManager.subscribe({
     userVisibleOnly: true,
-    applicationServerKey: env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
+    applicationServerKey: process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
   });
 
   await sendPushSubscriptionToServer(subscription);
+  return subscription;
 }
 
 export async function unregisterPushNotifications() {
@@ -38,14 +39,21 @@ export async function unregisterPushNotifications() {
   await existingSubscription.unsubscribe();
 }
 
-export async function sendPushSubscriptionToServer(
-  subscription
-) {
-  console.log("Sending push subscription to server", subscription);
+export async function sendPushSubscriptionToServer(subscription) {
+  await fetch("/api/register-push", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(subscription),
+  });
 }
 
-export async function deletePushSubscriptionFromServer(
-  subscription
-) {
-  console.log("Deleting push subscription from server", subscription);
+export async function deletePushSubscriptionFromServer() {
+  await fetch("/api/remove-push", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

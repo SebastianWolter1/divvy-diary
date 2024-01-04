@@ -5,7 +5,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import Cta from "@/components/Cta";
-import {isin} from "@form-validation/validator-isin";
+import { isin } from "@form-validation/validator-isin";
 
 const PriceAlarmForm = ({ user }) => {
   const router = useRouter();
@@ -21,7 +21,6 @@ const PriceAlarmForm = ({ user }) => {
   });
 
   const onSubmit = async (data) => {
-
     if (errors.isin) {
       setAlert({ status: "error", message: "Invalid ISIN" });
       return;
@@ -66,17 +65,21 @@ const PriceAlarmForm = ({ user }) => {
               ISIN
             </label>
             <input
-              {...register("isin", { required: "This field is required",     validate: value => isin().validate({ value }).valid || "Invalid ISIN" })}
+              {...register("isin", {
+                required: "This field is required",
+                validate: (value) =>
+                  isin().validate({ value }).valid || "Invalid ISIN",
+              })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               id="isin"
               name="isin"
             />
-          {errors.isin && (
-  <span className="text-red-500 text-xs italic">
-    {errors.isin.message}
-  </span>
-)}
+            {errors.isin && (
+              <span className="text-red-500 text-xs italic">
+                {errors.isin.message}
+              </span>
+            )}
           </div>
 
           <div className="mb-4">
