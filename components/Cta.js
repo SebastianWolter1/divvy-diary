@@ -2,8 +2,45 @@
 "use client";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import {
+  getCurrentPushSubscription,
+  registerPushNotifications,
+  unregisterPushNotifications,
+} from "@/notifications/pushService";
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 
 const Cta = ({ type }) => {
+  const [hasActivePushSubscription, setHasActivePushSubscription] = useState();
+  const router = useRouter();
+
+  useEffect(() => {
+    async function getActivePushSubscription() {
+      const subscription = await getCurrentPushSubscription();
+      setHasActivePushSubscription(!!subscription);
+    }
+    getActivePushSubscription();
+  }, []);
+
+  async function setPushNotificationsEnabled(enabled) {
+    try {
+      if (enabled) {
+        await registerPushNotifications();
+      } else {
+        await unregisterPushNotifications();
+      }
+      setHasActivePushSubscription(enabled);
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+      if (enabled && Notification.permission === "denied") {
+        alert("Please enable push notifications in your browser settings");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    }
+  }
+
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "http://localhost:3000" });
   };
@@ -21,6 +58,8 @@ const Cta = ({ type }) => {
       ? "Register"
       : type === "submitForm"
       ? "Set alarm"
+      : type === "subscription"
+      ? (hasActivePushSubscription ? "Disable Push" : "Enable Push")
       : null;
   const buttonType = type.includes("Form") ? "submit" : null;
   const buttonLink =
@@ -32,8 +71,13 @@ const Cta = ({ type }) => {
   const buttonColor =
     type.includes("Form") || type === "logout"
       ? "bg-orange-500 hover:bg-orange-600"
-      : "bg-orange-300 hover:bg-orange-400";
-  const buttonAction = type === "logout" ? handleSignOut : null;
+      : "bg-orange-400 hover:bg-orange-500";
+  const buttonAction = 
+    type === "logout" 
+      ? handleSignOut 
+      : type === "subscription"
+      ? () => setPushNotificationsEnabled(!hasActivePushSubscription)
+      : null;
 
   return (
     <button
@@ -41,7 +85,7 @@ const Cta = ({ type }) => {
       type={buttonType}
       onClick={buttonAction}
     >
-      {buttonType || type === "logout" ? (
+      {buttonType || type === "logout" || type === "subscription" ? (
         buttonText
       ) : (
         <Link href={buttonLink}>{buttonText}</Link>

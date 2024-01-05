@@ -14,7 +14,7 @@ function Serviceworker() {
     setUpServiceWorker();
   }, []);
 
-  return <div>Serviceworker</div>;
+  return null
 }
 
 export default Serviceworker;

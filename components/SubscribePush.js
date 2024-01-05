@@ -6,10 +6,11 @@ import {
   unregisterPushNotifications,
 } from "@/notifications/pushService";
 import { useState, useEffect } from "react";
+import {useRouter} from "next/navigation";
 
 export default function PushSubscriptionToggleButton() {
   const [hasActivePushSubscription, setHasActivePushSubscription] = useState();
-
+const router = useRouter();
   useEffect(() => {
     async function getActivePushSubscription() {
       const subscription = await getCurrentPushSubscription();
@@ -26,6 +27,7 @@ export default function PushSubscriptionToggleButton() {
         await unregisterPushNotifications();
       }
       setHasActivePushSubscription(enabled);
+      router.refresh();
     } catch (error) {
       console.error(error);
       if (enabled && Notification.permission === "denied") {
@@ -36,7 +38,7 @@ export default function PushSubscriptionToggleButton() {
     }
   }
 
-  if (hasActivePushSubscription === undefined) return null;
+  // if (hasActivePushSubscription === undefined) return null;
 
   return (
     <div>

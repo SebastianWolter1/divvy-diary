@@ -1,34 +1,25 @@
 import prisma from "@/lib/prisma";
-
-const users = await prisma.user.findMany({
-  where: {
-    name: "Test",
-  },
-  include: {
-    userValues: true,
-  },
-});
+import Cta from "@/components/Cta";
+import Image from "next/image";
 
 const Home = async () => {
   return (
     <>
-      <div className="h-screen bg-gray-800 text-white">
-        {users
-          ? users.map((user) => (
-              <ul key={user.id}>
-                <li>Name: {user.name}</li>
-                <li>Email: {user.email}</li>
-                <ul>
-                  {user.userValues.map((userValue) => (
-                    <ul key={userValue.id}>
-                      <li>ISIN: {userValue.isin}</li>
-                      <li>Price: {userValue.price}</li>
-                    </ul>
-                  ))}
-                </ul>
-              </ul>
-            ))
-          : null}
+      <div className="h-screen bg-gray-800 text-white flex flex-col items-center justify-center px-2">
+        <div className="text-left">
+          <h1 className="text-4xl mb-2">
+            <span className="block text-white">Preisalarme</span>
+            <span className="block text-orange-500">für deine Aktien</span>
+          </h1>
+          <p className="mb-4">Lass dich einfach per Web Push benachrichtigen.</p>
+        <div className="flex space-x-2 mb-4">
+          <Cta type="login" />
+          <Cta type="register" />
+        </div>
+        </div>
+        {/* <div>
+          <Image src="/logo.svg" width={24} height={24} alt="Random" />
+        </div> */}
       </div>
     </>
   );

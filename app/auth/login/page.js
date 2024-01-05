@@ -30,6 +30,7 @@ const LoginForm = () => {
       setAlert({ status: "success", message: "Login successfully" });
       setTimeout(() => {
         router.push("/dashboard");
+        router.refresh();
       }, 500);
     } else {
       setAlert({ status: "error", message: "Something went wrong" });

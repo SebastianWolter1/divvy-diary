@@ -40,7 +40,8 @@ const Dashboard = async () => {
   return (
     <>
       <div className="bg-gray-800 h-screen p-6 text-white">
-        <SubscribePush />
+        {/* <SubscribePush /> */}
+        <Serviceworker />
         <h3>Name: {user.name}</h3>
         <p>Email: {user.email}</p>
         {user.userValues.length
@@ -51,11 +52,10 @@ const Dashboard = async () => {
                   <li>PriceUSER: {userValue.price}</li>
                 </ul>
                 <FetchStocks user={user} />
-                <Serviceworker />
               </React.Fragment>
             ))
           : null}
-        <Cta type="logout" />
+        {/* <Cta type="logout" /> */}
         <PriceAlarm user={user} />
       </div>
     </>
