@@ -5,34 +5,36 @@ import Cta from "./Cta";
 
 const Navigation = async () => {
   const user = await getCurrentUser();
-  console.log({ user });
 
   return (
-    <nav className="flex justify-between items-center p-2 bg-gray-800 text-white">
-      <div className="flex-grow-0">
+    <nav className="flex justify-between items-center px-6 py-2 bg-gray-800 text-white">
+      <div className="flex">
         <Link href="https://www.divvydiary.com/de">
-          <Image src="/logo.svg" width={40} height={40} alt="divvyDiary" />
+          <div className="flex items-center">
+            <Image src="/logo.svg" width={35} height={35} alt="divvyDiary" />
+            <div className="ml-1 text-orange-400 hidden min-[420px]:block">DivvyDiary</div>
+          </div>
         </Link>
       </div>
-      <div className="flex-grow flex justify-center">
         {user?.name ? (
+      <div className="justify-center hidden md:flex">
           <div className="inline-block text-center">
-            <span className="text-xl text-white font-bold">Welcome </span>
+            <span className="text-xl text-white font-semibold">Welcome </span>
 
-            <span className="text-2xl text-orange-500 font-bold">{user.name}</span>
+            <span className="text-2xl text-orange-500 font-semibold">
+              {user.name}
+            </span>
           </div>
-        ) : null}
       </div>
-      <div className="flex-grow-0 flex space-x-2 items-center">
-        {user?.name ? (
-          <>
-            <Cta type="logout" />
-            <Cta type="subscription" />
-          </>
         ) : null}
-      </div>
+      {user?.name ? (
+        <div className="flex space-x-2 items-center">
+          <Cta type="subscription" />
+          <Cta type="logout" />
+        </div>
+      ) : null}
     </nav>
   );
-        }
+};
 
 export default Navigation;

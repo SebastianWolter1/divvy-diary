@@ -8,9 +8,9 @@ import {
   unregisterPushNotifications,
 } from "@/notifications/pushService";
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
-const Cta = ({ type }) => {
+const Cta = ({ type, id }) => {
   const [hasActivePushSubscription, setHasActivePushSubscription] = useState();
   const router = useRouter();
 
@@ -41,25 +41,41 @@ const Cta = ({ type }) => {
     }
   }
 
+  async function deleteAlarm() {
+    await fetch("/api/deleteAlarm", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    });
+
+    router.refresh();
+  }
+
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "http://localhost:3000" });
   };
 
   const buttonText =
     type === "login"
-      ? "Already have an account?"
+      ? "Login mit bestehendem Account"
       : type === "register"
-      ? "Don't have an account?"
+      ? "Erstelle einen Account"
       : type === "logout"
       ? "Logout"
       : type === "loginForm"
       ? "Login"
       : type === "registerForm"
-      ? "Register"
+      ? "Account erstellen"
       : type === "submitForm"
-      ? "Set alarm"
+      ? "Preisalarm erstellen"
+      : type === "deleteForm"
+      ? "Preisalarm löschen"
       : type === "subscription"
-      ? (hasActivePushSubscription ? "Disable Push" : "Enable Push")
+      ? hasActivePushSubscription
+        ? "Push Nachrichten deaktivieren"
+        : "Push Nachrichten aktivieren"
       : null;
   const buttonType = type.includes("Form") ? "submit" : null;
   const buttonLink =
@@ -68,20 +84,24 @@ const Cta = ({ type }) => {
       : type === "register"
       ? "/auth/register"
       : null;
-  const buttonColor =
-    type.includes("Form") || type === "logout"
-      ? "bg-orange-500 hover:bg-orange-600"
-      : "bg-orange-400 hover:bg-orange-500";
-  const buttonAction = 
-    type === "logout" 
-      ? handleSignOut 
+      const buttonColor = 
+      type === "loginForm" || type === "registerForm" || type === "submitForm" || (type === "subscription" && !hasActivePushSubscription)
+        ? "bg-orange-700 hover:bg-orange-600"
+        : type === "deleteForm" || type === "logout" || (type === "subscription" && hasActivePushSubscription)
+        ? "bg-orange-600 hover:bg-orange-700"
+        : "bg-orange-400 hover:bg-orange-500";
+  const buttonAction =
+    type === "logout"
+      ? handleSignOut
       : type === "subscription"
       ? () => setPushNotificationsEnabled(!hasActivePushSubscription)
+      : type === "deleteForm"
+      ? deleteAlarm
       : null;
 
   return (
     <button
-      className={`${buttonColor} text-gray-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+      className={`${buttonColor} text-white my-2 text-xs md:text-sm  font-medium py-2 md:px-4 px-2 rounded-lg focus:outline-none focus:shadow-outline`}
       type={buttonType}
       onClick={buttonAction}
     >

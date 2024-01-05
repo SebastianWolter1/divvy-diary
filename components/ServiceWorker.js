@@ -1,6 +1,6 @@
 "use client";
 import { registerServiceWorker } from "@/utils/serviceWorker";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 function Serviceworker() {
   useEffect(() => {
@@ -14,7 +14,7 @@ function Serviceworker() {
     setUpServiceWorker();
   }, []);
 
-  return null
+  return null;
 }
 
 export default Serviceworker;

@@ -40,17 +40,35 @@ const RegisterForm = () => {
 
   return (
     <>
+
+      <header className="bg-gray-700">
+      <div className="relative mx-auto max-w-screen-2xl px-6 py-4">
+
+          <h1 className="text-lg leading-6 text-white">Account erstellen</h1>
+        </div>
+      </header>
       {alert.message && (
         <div
           className={clsx(
-            "font-bold bg-gray-800 p-2",
+            "font-bold bg-gray-900 p-6",
             alert.status === "success" ? "text-green-500" : "text-red-500"
           )}
         >
           {alert.status === "success" ? "✅" : "❌"} {alert.message}
         </div>
       )}
-      <div className="bg-gray-800 h-screen p-6">
+
+      <div className="bg-gray-900 h-screen p-6">
+        <div className="mx-auto my-12 w-full px-4">
+          <div className="align-middle inline-block min-w-full rounded-lg bg-gray-700 max-w-full">
+            <div className="flex items-center justify-center px-4 py-12">
+              <div className="w-full max-w-md">
+                <div>
+                  <h2 className="my-6 text-center text-3xl font-bold leading-9 text-white">
+                    Erstelle einen Account
+                  </h2>
+                </div>
+                
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label
@@ -68,7 +86,7 @@ const RegisterForm = () => {
             />
             {errors.name && (
               <span className="text-red-500 text-xs italic">
-                This field is required
+                Dieses Feld ist erforderlich
               </span>
             )}
           </div>
@@ -89,7 +107,7 @@ const RegisterForm = () => {
             />
             {errors.email && (
               <span className="text-red-500 text-xs italic">
-                This field is required
+                Dieses Feld ist erforderlich
               </span>
             )}
           </div>
@@ -110,15 +128,24 @@ const RegisterForm = () => {
             />
             {errors.password && (
               <span className="text-red-500 text-xs italic">
-                This field is required
+                Dieses Feld ist erforderlich
               </span>
             )}
           </div>
 
+
+        <div className="flex justify-between space-x-1">
           <Cta type="registerForm" />
-        </form>
         <Cta type="login" />
+                    
+                  </div>
+        </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </>
   );
 };
