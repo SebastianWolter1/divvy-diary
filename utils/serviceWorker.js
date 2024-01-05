@@ -2,7 +2,7 @@ export async function registerServiceWorker() {
     if (!("serviceWorker" in navigator)) {
       throw Error("Service workers are not supported by this browser");
     }
-    await navigator.serviceWorker.register("/serviceWorker.js");
+    await navigator.serviceWorker.register("/serviceWorker.js",{ scope: '/' });
   }
   
   export async function getReadyServiceWorker() {

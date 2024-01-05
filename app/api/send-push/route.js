@@ -20,7 +20,11 @@ export const POST = async (req) => {
       throw Error("No subscription or payload received");
     }
 
+    console.log("Received new subscription and payload", subscription, payload);
+
     await webpush.sendNotification(subscription, JSON.stringify(payload));
+
+    console.log("Notification sent successfully");
     return new NextResponse(200, { message: "Notification sent successfully" });
   } catch (error) {
     console.error(error);

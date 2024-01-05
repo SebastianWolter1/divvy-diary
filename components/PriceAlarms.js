@@ -26,7 +26,7 @@ const PriceAlarmForm = ({ user }) => {
       return;
     }
     try {
-      await fetch("/api/auth/userValues", {
+      await fetch("/api/addAlarm", {
         method: "POST",
         body: JSON.stringify({ ...data, userId: user.id }),
         headers: {
@@ -34,8 +34,9 @@ const PriceAlarmForm = ({ user }) => {
         },
       });
 
-      setAlert({ status: "success", message: "User value added successfully" });
+      setAlert({ status: "success", message: "Alarm added successfully" });
       setTimeout(() => {
+        setAlert({ status: "", message: "" });
         router.refresh();
       }, 500);
     } catch (error) {

@@ -4,11 +4,13 @@ self.addEventListener("push", (event) => {
   const pushMessage = data.json();
   console.log("Pushed:", pushMessage);
 
-  const showNotification = () => {
+  const showNotification = async () => {
     try {
       console.log("Showing notification");
-      self.registration.showNotification(pushMessage.title, {
+      await self.registration.showNotification(pushMessage.title, {
         body: pushMessage.body,
+        badge: "/divvy.png",
+        icon: "/divvy.png",
       });
       console.log("Notification shown");
     } catch (err) {
