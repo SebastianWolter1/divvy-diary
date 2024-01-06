@@ -84,12 +84,17 @@ const Cta = ({ type, id }) => {
       : type === "register"
       ? "/auth/register"
       : null;
-      const buttonColor = 
-      type === "loginForm" || type === "registerForm" || type === "submitForm" || (type === "subscription" && !hasActivePushSubscription)
-        ? "bg-orange-700 hover:bg-orange-600"
-        : type === "deleteForm" || type === "logout" || (type === "subscription" && hasActivePushSubscription)
-        ? "bg-orange-600 hover:bg-orange-700"
-        : "bg-orange-400 hover:bg-orange-500";
+  const buttonColor =
+    type === "loginForm" ||
+    type === "registerForm" ||
+    type === "submitForm" ||
+    (type === "subscription" && !hasActivePushSubscription)
+      ? "bg-orange-700 hover:bg-orange-600"
+      : type === "deleteForm" ||
+        type === "logout" ||
+        (type === "subscription" && hasActivePushSubscription)
+      ? "bg-orange-600 hover:bg-orange-700"
+      : "bg-orange-400 hover:bg-orange-500";
   const buttonAction =
     type === "logout"
       ? handleSignOut
@@ -101,7 +106,7 @@ const Cta = ({ type, id }) => {
 
   return (
     <button
-      className={`${buttonColor} text-white my-2 text-xs md:text-sm  font-medium py-2 md:px-4 px-2 rounded-lg focus:outline-none focus:shadow-outline`}
+      className={`${buttonColor} text-gray-300 dark:text-white my-2 text-xs md:text-sm  font-medium py-2 md:px-4 px-2 rounded-lg focus:outline-none focus:shadow-outline`}
       type={buttonType}
       onClick={buttonAction}
     >
