@@ -22,13 +22,16 @@ const Navigation = async () => {
       {user?.name ? (
         <div className="justify-center hidden md:flex">
           <div className="inline-block text-center">
+             <Link href="/dashboard">
             <span className="text-xl text-gray-300 dark:text-white font-semibold">
               Welcome{" "}
             </span>
 
             <span className="text-2xl text-orange-500 font-semibold">
-              {user.name}
+             
+             {user.name}
             </span>
+             </Link> 
           </div>
         </div>
       ) : null}

@@ -9,7 +9,7 @@ self.addEventListener("push", (event) => {
       console.log("Showing notification");
       await self.registration.showNotification(pushMessage.title, {
         body: pushMessage.body,
-        badge: "/divvy.png",
+        badge: "/badge.png",
         icon: "/divvy.png",
       });
       console.log("Notification shown");

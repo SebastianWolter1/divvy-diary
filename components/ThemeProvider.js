@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 
 const Provider = ({children}) => {
 
-const [mounted,setMounted] = useState(false);
+const [mounted,setMounted] = useState();
 
 useEffect (() => {
     setMounted(true);
