@@ -71,7 +71,7 @@ const Cta = ({ type, id }) => {
       : type === "submitForm"
       ? "Preisalarm erstellen"
       : type === "deleteForm"
-      ? "Preisalarm löschen"
+      ? "löschen"
       : type === "subscription"
       ? hasActivePushSubscription
         ? "Push Nachrichten deaktivieren"
