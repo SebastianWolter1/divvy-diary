@@ -34,13 +34,16 @@ const PriceAlarmForm = ({ user }) => {
         },
       });
 
-      setAlert({ status: "success", message: "Alarm added successfully" });
+      setAlert({ status: "success", message: "Preisalarm hinzugefügt" });
       setTimeout(() => {
         setAlert({ status: "", message: "" });
         router.refresh();
       }, 500);
     } catch (error) {
-      setAlert({ status: "error", message: "Something went wrong" });
+      setAlert({
+        status: "error",
+        message: "Das hat leider nicht funktioniert",
+      });
     }
   };
 
@@ -49,7 +52,8 @@ const PriceAlarmForm = ({ user }) => {
       {alert.message && (
         <div
           className={clsx(
-            "font-bold bg-gray-800 p-2",
+            "font-bold bg-gray-600 dark:bg-gray-900 p-6",
+
             alert.status === "success" ? "text-green-500" : "text-red-500"
           )}
         >
@@ -57,20 +61,20 @@ const PriceAlarmForm = ({ user }) => {
         </div>
       )}
 
-      <div className="bg-gray-900 h-screen p-6">
+      <div className="p-6">
         <div className="mx-auto my-12 w-full px-4">
-          <div className="align-middle inline-block min-w-full rounded-lg bg-gray-700 max-w-full">
+          <div className="align-middle inline-block min-w-full rounded-lg  bg-gray-500 dark:bg-gray-700 max-w-full">
             <div className="flex items-center justify-center px-4 py-12">
               <div className="w-full max-w-md">
                 <div>
-                  <h2 className="my-6 text-center text-3xl font-bold leading-9 text-white">
+                  <h2 className="my-6 text-center text-3xl font-bold leading-9 text-gray-300 dark:text-white">
                     Erstelle einen Preisalarm
                   </h2>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-4">
                     <label
-                      className="block text-gray-200 text-sm font-bold mb-2"
+                      className="block text-gray-300 dark:text-white text-sm font-bold mb-2"
                       htmlFor="isin"
                     >
                       ISIN
@@ -79,9 +83,10 @@ const PriceAlarmForm = ({ user }) => {
                       {...register("isin", {
                         required: "Dieses Feld ist erforderlich",
                         validate: (value) =>
-                          isin().validate({ value }).valid || "Bitte gib einen gültige ISIN ein",
+                          isin().validate({ value }).valid ||
+                          "Bitte gib einen gültige ISIN ein",
                       })}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      className="shadow bg-gray-400 dark:bg-gray-600 rounded w-full py-2 px-3 text-gray-200 dark:text-white focus:outline-none"
                       type="text"
                       id="isin"
                       name="isin"
@@ -95,27 +100,28 @@ const PriceAlarmForm = ({ user }) => {
 
                   <div className="mb-4">
                     <label
-                      className="block text-gray-200 text-sm font-bold mb-2"
+                      className="block text-gray-300 dark:text-white text-sm font-bold mb-2"
                       htmlFor="price"
                     >
                       Preis in USD
                     </label>
                     <input
-                       {...register("price", { 
-                        required: "Dieses Feld ist erforderlich", 
+                      {...register("price", {
+                        required: "Dieses Feld ist erforderlich",
                         pattern: {
                           value: /^\d+,\d{2}$/,
-                          message: "Bitte geben Sie einen gültigen Wert ein, z.B. (123,45)"
-                        }
+                          message:
+                            "Bitte geben Sie einen gültigen Wert ein, z.B. (123,45)",
+                        },
                       })}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      className="shadow bg-gray-400 dark:bg-gray-600 rounded w-full py-2 px-3 text-gray-200 dark:text-white focus:outline-none"
                       type="text"
                       id="price"
                       name="price"
                     />
                     {errors.price && (
                       <span className="text-red-500 text-xs italic">
-{errors.price.message}
+                        {errors.price.message}
                       </span>
                     )}
                   </div>

@@ -1,9 +1,7 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata = {
   title: "PriceAlarms - DivviyDiary",
@@ -14,10 +12,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gray-900">
-        <Navigation />
-        {children}
-        <Footer />
+      <body className="dark:bg-gray-900 bg-gray-600 text-gray-300 dark:text-white">
+        <ThemeProvider>
+          <Navigation />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

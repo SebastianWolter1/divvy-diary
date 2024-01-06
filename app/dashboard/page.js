@@ -36,7 +36,7 @@ const Dashboard = async () => {
   if (!user)
     return (
       <>
-        <div className="bg-gray-900 h-screen p-6 text-white flex flex-col items-center justify-start space-y-4">
+        <div className="bg-gray-600 dark:bg-gray-900 h-screen p-6 text-gray-300 dark:text-white flex flex-col items-center justify-start space-y-4">
           <h3 className="mb-4 text-xl font-bold text-center">
             Du bist nicht eingeloggt...
           </h3>
@@ -48,14 +48,13 @@ const Dashboard = async () => {
 
   return (
     <>
-      <div className="bg-gray-900 h-screen p-6 text-white">
+      <div className=" p-6">
         <Serviceworker />
         {user?.name ? (
           <div className="justify-center flex md:hidden mb-4">
             <div className="inline-block text-center">
-              <span className="text-2xl text-white font-semibold">
-                Welcome{" "}
-              </span>
+            <span className="text-2xl text-gray-300 dark:text-white font-semibold">Welcome{" "}</span>
+
 
               <span className="text-3xl text-orange-500 font-semibold">
                 {user.name}
@@ -63,15 +62,15 @@ const Dashboard = async () => {
             </div>
           </div>
         ) : null}
-        <div className="bg-gray-900 ">
+        <div>
           <div className="mx-auto mt-16 w-full">
-            <div className="inline-block min-w-full rounded-lg bg-gray-700 max-w-full">
+            <div className="inline-block min-w-full rounded-lg bg-gray-500 dark:bg-gray-700 max-w-full">
               <div className="flex items-center py-12 px-4">
                 <div className="w-full">
-                  <h2 className="my-6 text-center text-3xl font-bold leading-9 text-white mb-4">
+                  <h2 className="my-6 text-center text-3xl font-bold leading-9 text-gray-300 dark:text-white mb-4">
                     Deine Preisalarme
                   </h2>
-                  <div className="text-center grid grid-cols-3 gap-2 text-white font-bold mb-4 mt-12">
+                  <div className="text-center grid grid-cols-3 gap-2 text-gray-300 dark:text-white font-bold mb-4 mt-12">
   <p>Name</p>
   <p>Preis</p>
   
@@ -83,14 +82,14 @@ const Dashboard = async () => {
         <React.Fragment key={userValue.id}>
           <div
             className={`text-center w-full grid grid-cols-3 gap-2 items-center rounded text-white mb-2 ${
-              index % 2 === 0 ? "bg-gray-800" : ""
+              index % 2 === 0 ? "bg-gray-600 dark:bg-gray-800" : ""
             }`}
           >
             <div>
               <p className="text-orange-600">{stockName}</p>
-              <p className="text-[10px]">{userValue.isin}</p>
+              <p className="text-[10px] text-gray-300 dark:text-white">{userValue.isin}</p>
             </div>
-            <p className="text-xs">{formatCurrency(userValue.price)}</p>
+            <p className="text-xs text-gray-300 dark:text-white ">{formatCurrency(userValue.price)}</p>
             <div>
               <Cta type="deleteForm" id={userValue.id} />
             </div>
