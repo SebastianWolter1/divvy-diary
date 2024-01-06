@@ -56,56 +56,76 @@ const PriceAlarmForm = ({ user }) => {
           {alert.status === "success" ? "✅" : "❌"} {alert.message}
         </div>
       )}
-      <div className="">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label
-              className="block text-gray-200 text-sm font-bold mb-2"
-              htmlFor="isin"
-            >
-              ISIN
-            </label>
-            <input
-              {...register("isin", {
-                required: "This field is required",
-                validate: (value) =>
-                  isin().validate({ value }).valid || "Invalid ISIN",
-              })}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              id="isin"
-              name="isin"
-            />
-            {errors.isin && (
-              <span className="text-red-500 text-xs italic">
-                {errors.isin.message}
-              </span>
-            )}
-          </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-200 text-sm font-bold mb-2"
-              htmlFor="price"
-            >
-              Price
-            </label>
-            <input
-              {...register("price", { required: true })}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              id="price"
-              name="price"
-            />
-            {errors.price && (
-              <span className="text-red-500 text-xs italic">
-                This field is required
-              </span>
-            )}
-          </div>
+      <div className="bg-gray-900 h-screen p-6">
+        <div className="mx-auto my-12 w-full px-4">
+          <div className="align-middle inline-block min-w-full rounded-lg bg-gray-700 max-w-full">
+            <div className="flex items-center justify-center px-4 py-12">
+              <div className="w-full max-w-md">
+                <div>
+                  <h2 className="my-6 text-center text-3xl font-bold leading-9 text-white">
+                    Erstelle einen Preisalarm
+                  </h2>
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mb-4">
+                    <label
+                      className="block text-gray-200 text-sm font-bold mb-2"
+                      htmlFor="isin"
+                    >
+                      ISIN
+                    </label>
+                    <input
+                      {...register("isin", {
+                        required: "Dieses Feld ist erforderlich",
+                        validate: (value) =>
+                          isin().validate({ value }).valid || "Bitte gib einen gültige ISIN ein",
+                      })}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      type="text"
+                      id="isin"
+                      name="isin"
+                    />
+                    {errors.isin && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors.isin.message}
+                      </span>
+                    )}
+                  </div>
 
-          <Cta type="submitForm" />
-        </form>
+                  <div className="mb-4">
+                    <label
+                      className="block text-gray-200 text-sm font-bold mb-2"
+                      htmlFor="price"
+                    >
+                      Preis in USD
+                    </label>
+                    <input
+                       {...register("price", { 
+                        required: "Dieses Feld ist erforderlich", 
+                        pattern: {
+                          value: /^\d+,\d{2}$/,
+                          message: "Bitte geben Sie einen gültigen Wert ein, z.B. (123,45)"
+                        }
+                      })}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      type="text"
+                      id="price"
+                      name="price"
+                    />
+                    {errors.price && (
+                      <span className="text-red-500 text-xs italic">
+{errors.price.message}
+                      </span>
+                    )}
+                  </div>
+
+                  <Cta type="submitForm" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
