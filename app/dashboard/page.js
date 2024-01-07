@@ -2,11 +2,11 @@ import { getServerSession } from "next-auth/next";
 import prisma from "@/lib/prisma";
 import Cta from "@/components/Cta";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import FetchStocks from "@/lib/fetchStocks";
 import PriceAlarm from "@/components/PriceAlarms";
 import React from "react";
 import Serviceworker from "@/components/ServiceWorker";
-import { formatCurrency } from "@/lib/formatCurrency";
+import { formatCurrency } from "@/utils/formatCurrency";
+import GetStockPrice from "@/components/getStockPrice";
 
 export const getCurrentUser = async () => {
   try {
@@ -16,7 +16,6 @@ export const getCurrentUser = async () => {
       where: { email: session.user.email },
       include: { userValues: true },
     });
-    console.log(currentUser);
     if (!currentUser) return;
     return currentUser;
   } catch (error) {
@@ -24,7 +23,7 @@ export const getCurrentUser = async () => {
   }
 };
 
-const getStockName = async (isin) => {
+export const getStockName = async (isin) => {
   const res = await fetch(`https://api.divvydiary.com/symbols/${isin}`);
   const data = await res.json();
   return data.name;
@@ -53,8 +52,9 @@ const Dashboard = async () => {
         {user?.name ? (
           <div className="justify-center flex md:hidden mb-4">
             <div className="inline-block text-center">
-            <span className="text-2xl text-gray-300 dark:text-white font-semibold">Welcome{" "}</span>
-
+              <span className="text-2xl text-gray-300 dark:text-white font-semibold">
+                Welcome{" "}
+              </span>
 
               <span className="text-3xl text-orange-500 font-semibold">
                 {user.name}
@@ -71,34 +71,39 @@ const Dashboard = async () => {
                     Deine Preisalarme
                   </h2>
                   <div className="text-center grid grid-cols-3 gap-2 text-gray-300 dark:text-white font-bold mb-4 mt-12">
-  <p>Name</p>
-  <p>Preis</p>
-  
-</div>
-{user.userValues.length
-  ? user.userValues.map(async (userValue, index) => {
-      const stockName = await getStockName(userValue.isin);
-      return (
-        <React.Fragment key={userValue.id}>
-          <div
-            className={`text-center w-full grid grid-cols-3 gap-2 items-center rounded text-white mb-2 ${
-              index % 2 === 0 ? "bg-gray-600 dark:bg-gray-800" : ""
-            }`}
-          >
-            <div>
-              <p className="text-orange-600">{stockName}</p>
-              <p className="text-[10px] text-gray-300 dark:text-white">{userValue.isin}</p>
-            </div>
-            <p className="text-xs text-gray-300 dark:text-white ">{formatCurrency(userValue.price)}</p>
-            <div>
-              <Cta type="deleteForm" id={userValue.id} />
-            </div>
-          </div>
-          <FetchStocks user={user} />
-        </React.Fragment>
-      );
-    })
-  : null}
+                    <p>Name</p>
+                    <p>Preisalarm</p>
+                  </div>
+                  {
+                     user.userValues.map(async (userValue, index) => {
+                        const stockName = await getStockName(userValue.isin);
+                        return (
+                          <React.Fragment key={userValue.id}>
+                            <div
+                              className={`text-center w-full grid grid-cols-3 gap-2 items-center rounded text-white mb-2 ${
+                                index % 2 === 0
+                                  ? "bg-gray-600 dark:bg-gray-800"
+                                  : ""
+                              }`}
+                            >
+                              <div>
+                                <p className="text-orange-500 font-semibold">{stockName}</p>
+                                <p className="text-[10px] text-gray-300 dark:text-white">
+                                  {userValue.isin}
+                                </p>
+                              </div>
+                              <p className="text-xs text-gray-300 dark:text-white ">
+                                {formatCurrency(userValue.price)}
+                              </p>
+                              <div>
+                                <Cta type="deleteForm" id={userValue.id} />
+                              </div>
+                            </div>
+                          </React.Fragment>
+                        );
+                      })
+                    }
+                    <GetStockPrice user={user} />
                 </div>
               </div>
             </div>

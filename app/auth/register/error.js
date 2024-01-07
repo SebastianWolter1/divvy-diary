@@ -18,7 +18,7 @@ export default function Error({ error, reset }) {
           className="bg-orange-600 hover:bg-orange-700 text-gray-300 dark:text-white font-bold py-2 px-4 rounded"
           onClick={() => reset()}
         >
-          Try again
+          Reset
         </button>
       </div>
     </div>

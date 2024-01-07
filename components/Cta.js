@@ -49,7 +49,6 @@ const Cta = ({ type, id }) => {
       },
       body: JSON.stringify({ id: id }),
     });
-
     router.refresh();
   }
 
@@ -89,12 +88,12 @@ const Cta = ({ type, id }) => {
     type === "registerForm" ||
     type === "submitForm" ||
     (type === "subscription" && !hasActivePushSubscription)
-      ? "bg-orange-700 hover:bg-orange-600"
+      ? "bg-orange-700 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-500"
       : type === "deleteForm" ||
         type === "logout" ||
         (type === "subscription" && hasActivePushSubscription)
-      ? "bg-orange-600 hover:bg-orange-700"
-      : "bg-orange-400 hover:bg-orange-500";
+      ? "bg-orange-600 hover:bg-orange-700 dark:bg-orange-700 dark:hover:bg-orange-800"
+      : "bg-orange-600 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-400";
   const buttonAction =
     type === "logout"
       ? handleSignOut

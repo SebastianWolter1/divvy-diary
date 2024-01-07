@@ -25,5 +25,6 @@ model PriceAlarms {
   isin   String
   price  String
   userId String
+  pushed Boolean @default(false)
   user   User   @relation(fields: [userId], references: [id])
 }

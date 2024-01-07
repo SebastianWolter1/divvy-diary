@@ -54,7 +54,7 @@ const PriceAlarmForm = ({ user }) => {
           className={clsx(
             "font-bold bg-gray-600 dark:bg-gray-900 p-6",
 
-            alert.status === "success" ? "text-green-500" : "text-red-500"
+            alert.status === "success" ? "text-green-500" : "text-orange-700"
           )}
         >
           {alert.status === "success" ? "✅" : "❌"} {alert.message}
@@ -92,7 +92,7 @@ const PriceAlarmForm = ({ user }) => {
                       name="isin"
                     />
                     {errors.isin && (
-                      <span className="text-red-500 text-xs italic">
+                      <span className="text-orange-700 text-xs italic">
                         {errors.isin.message}
                       </span>
                     )}
@@ -120,7 +120,7 @@ const PriceAlarmForm = ({ user }) => {
                       name="price"
                     />
                     {errors.price && (
-                      <span className="text-red-500 text-xs italic">
+                      <span className="text-orange-700 text-xs italic">
                         {errors.price.message}
                       </span>
                     )}
