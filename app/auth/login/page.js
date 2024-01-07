@@ -52,7 +52,7 @@ const LoginForm = () => {
         <div
           className={clsx(
             "font-bold bg-gray-600 dark:bg-gray-900 p-6",
-            alert.status === "success" ? "text-green-500" : "text-red-500"
+            alert.status === "success" ? "text-green-500" : "text-orange-700"
           )}
         >
           {alert.status === "success" ? "✅" : "❌"} {alert.message}
@@ -85,7 +85,7 @@ const LoginForm = () => {
                       name="email"
                     />
                     {errors.email && (
-                      <span className="text-red-500 text-xs italic">
+                      <span className="text-orange-700 text-xs italic">
                         This field is required
                       </span>
                     )}
@@ -106,7 +106,7 @@ const LoginForm = () => {
                       name="password"
                     />
                     {errors.password && (
-                      <span className="text-red-500 text-xs italic">
+                      <span className="text-orange-700 text-xs italic">
                         This field is required
                       </span>
                     )}

@@ -2,11 +2,11 @@ import { getServerSession } from "next-auth/next";
 import prisma from "@/lib/prisma";
 import Cta from "@/components/Cta";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import FetchStocks from "@/lib/fetchStocks";
 import PriceAlarm from "@/components/PriceAlarms";
 import React from "react";
 import Serviceworker from "@/components/ServiceWorker";
-import { formatCurrency } from "@/lib/formatCurrency";
+import { formatCurrency } from "@/utils/formatCurrency";
+import GetStockPrice from "@/components/getStockPrice";
 
 export const getCurrentUser = async () => {
   try {
@@ -16,7 +16,6 @@ export const getCurrentUser = async () => {
       where: { email: session.user.email },
       include: { userValues: true },
     });
-    console.log(currentUser);
     if (!currentUser) return;
     return currentUser;
   } catch (error) {
@@ -24,7 +23,7 @@ export const getCurrentUser = async () => {
   }
 };
 
-const getStockName = async (isin) => {
+export const getStockName = async (isin) => {
   const res = await fetch(`https://api.divvydiary.com/symbols/${isin}`);
   const data = await res.json();
   return data.name;
@@ -88,7 +87,7 @@ const Dashboard = async () => {
                               }`}
                             >
                               <div>
-                                <p className="text-orange-600">{stockName}</p>
+                                <p className="text-orange-500 font-semibold">{stockName}</p>
                                 <p className="text-[10px] text-gray-300 dark:text-white">
                                   {userValue.isin}
                                 </p>
@@ -100,11 +99,11 @@ const Dashboard = async () => {
                                 <Cta type="deleteForm" id={userValue.id} />
                               </div>
                             </div>
-                            <FetchStocks user={user} />
                           </React.Fragment>
                         );
                       })
                     }
+                    <GetStockPrice user={user} />
                 </div>
               </div>
             </div>

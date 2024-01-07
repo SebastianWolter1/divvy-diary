@@ -28,7 +28,7 @@ const RegisterForm = () => {
         },
       });
 
-      setAlert({ status: "success", message: "Rgistrierung erfolgreich" });
+      setAlert({ status: "success", message: "Registrierung erfolgreich" });
 
       setTimeout(() => {
         router.push("/auth/login");
@@ -54,7 +54,7 @@ const RegisterForm = () => {
         <div
           className={clsx(
             "font-bold bg-gray-600 dark:bg-gray-900 p-6",
-            alert.status === "success" ? "text-green-500" : "text-red-500"
+            alert.status === "success" ? "text-green-500" : "text-orange-700"
           )}
         >
           {alert.status === "success" ? "✅" : "❌"} {alert.message}
@@ -88,7 +88,7 @@ const RegisterForm = () => {
                       name="name"
                     />
                     {errors.name && (
-                      <span className="text-red-500 text-xs italic">
+                      <span className="text-orange-700 text-xs italic">
                         Dieses Feld ist erforderlich
                       </span>
                     )}
@@ -109,7 +109,7 @@ const RegisterForm = () => {
                       name="email"
                     />
                     {errors.email && (
-                      <span className="text-red-500 text-xs italic">
+                      <span className="text-orange-700 text-xs italic">
                         Dieses Feld ist erforderlich
                       </span>
                     )}
@@ -130,7 +130,7 @@ const RegisterForm = () => {
                       name="password"
                     />
                     {errors.password && (
-                      <span className="text-red-500 text-xs italic">
+                      <span className="text-orange-700 text-xs italic">
                         Dieses Feld ist erforderlich
                       </span>
                     )}

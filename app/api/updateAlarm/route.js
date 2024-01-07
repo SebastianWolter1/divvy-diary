@@ -1,16 +1,16 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function PUT(request) {
   try {
     const body = await request.json();
-    const { isin, price, userId } = body;
-    const priceAlarm = await prisma.priceAlarms.create({
-      data: { isin, price, userId },
+    const { id } = body;
+    const priceAlarm = await prisma.priceAlarms.update({
+        where: {id}, 
+      data: { pushed: true },
     });
     return NextResponse.json(priceAlarm);
   } catch (error) {
     console.log({ error });
   }
 }
-

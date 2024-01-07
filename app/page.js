@@ -1,5 +1,4 @@
 import Cta from "@/components/Cta";
-import Loading from "./loading";
 
 const Home = async () => {
   return (
