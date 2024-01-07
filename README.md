@@ -1,13 +1,13 @@
 
 ## DivvyDiary - Preis Alarm
 
-Next14 App Router
-Javascript
-Tailwind
-Postgres SQL - Vercel
-Prisma
-Web Push
-Next Auth
+Next14 App Router |
+Javascript |
+Tailwind |
+Postgres SQL - Vercel |
+Prisma |
+Web Push |
+Next Auth |
 Divvy Diary API
 
 ### Landing Page:
