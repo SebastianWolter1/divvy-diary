@@ -17,7 +17,7 @@ model User {
   email      String        @unique
   password   String
   userValues PriceAlarms[]
-  subscriptions Json?
+  subscriptions Json? @default("{}")
 }
 
 model PriceAlarms {

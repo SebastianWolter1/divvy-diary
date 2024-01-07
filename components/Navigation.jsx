@@ -26,9 +26,7 @@ const Navigation = async () => {
             <span className="text-xl text-gray-300 dark:text-white font-semibold">
               Welcome{" "}
             </span>
-
             <span className="text-2xl text-orange-500 font-semibold">
-             
              {user.name}
             </span>
              </Link> 

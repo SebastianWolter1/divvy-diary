@@ -2,18 +2,17 @@ import { formatCurrency } from "@/utils/formatCurrency";
 
 const GetStockPrice = async ({ user }) => {
   if (!user) return;
-  console.log("7", user);
 
   const comparePrices = async () => {
     const updatedUserRes = await fetch(
-      `http://localhost:3000/api/getUpdatedUser/${user.id}`
+      `${process.env.BASE_URL}api/getUpdatedUser/${user.id}`
     );
     const updatedUser = await updatedUserRes.json();
 
     const fetchedData = await Promise.all(
       updatedUser.userValues.map(async (userValue) => {
         const res = await fetch(
-          `https://api.divvydiary.com/symbols/${userValue.isin}`
+          `${process.env.API_URL}${userValue.isin}`
         );
         if (!res.ok) {
           return null;
@@ -44,26 +43,24 @@ const GetStockPrice = async ({ user }) => {
             user.price
           )} erreicht.`,
         };
-        await fetch("http://localhost:3000/api/send-push", {
+        await fetch(`${process.env.BASE_URL}api/send-push`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ subscription: user.subscriptions, payload }),
         });
-        await fetch("http://localhost:3000/api/updateAlarm", {
+        await fetch(`${process.env.BASE_URL}api/updateAlarm`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ id: user.id }),
         });
-      } else {
-        console.log("No match");
-      }
+      } 
     }
 
-    setTimeout(comparePrices, 1000 * 20);
+    setTimeout(comparePrices, 1000 * 60);
   };
   comparePrices();
 
