@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## DivvyDiary - Preis Alarm
 
-First, run the development server:
+Next14 App Router
+Javascript
+Tailwind
+Postgres SQL - Vercel
+Prisma
+Web Push
+Next Auth
+Divvy Diary API
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Landing Page:
+The user can choose to register or login, also can switch light and dark theme
+and click the links to DivvyDiary HP and my Github profile.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Login Form:
+Choose to login with email and password -validated-, go to register form 
+or click the links or theme switch, home leads back to landingpage.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Register Form
+Choose to register with Email, Name and Password -validated-, switch to login form
+or click the links or theme switch, home leads back to landingpage.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Dashboard
+After logging in you get forwarded to your dashboard. The Welcome {Username} leads back to landingpage.
+You see your price alarms -when set- and below a form to add alarms. 
+The list shows name, price, isin and a delete button for each alarm.
+You can switch on and off notifications or logout. logout leads back to landingpage.
+When notifications are switched on and allowed by the browser you will be noticed when an alarms hits.
+Of course you can click the links or theme switch.
+If you are not logged in and navigating to the dashboard you get the choice to login or register.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
