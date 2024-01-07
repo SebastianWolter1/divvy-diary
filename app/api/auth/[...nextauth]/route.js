@@ -27,7 +27,7 @@ export const authOptions = {
       },
     }),
   ],
-  debug: process.env.NODE_ENV === "production",
+  debug: process.env.NODE_ENV === "development",
   session: { strategy: "jwt" },
   secret: "secret",
 };
