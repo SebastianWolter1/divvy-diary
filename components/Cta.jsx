@@ -42,7 +42,7 @@ const Cta = ({ type, id }) => {
   }
 
   async function deleteAlarm() {
-    await fetch("/api/deleteAlarm", {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/deleteAlarm`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
