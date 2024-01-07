@@ -24,7 +24,7 @@ export const getCurrentUser = async () => {
 };
 
 export const getStockName = async (isin) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${isin}`);
+  const res = await fetch(`https://api.divvydiary.com/symbols/${isin}`);
   const data = await res.json();
   return data.name;
 };

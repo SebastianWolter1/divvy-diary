@@ -5,14 +5,14 @@ const GetStockPrice = async ({ user }) => {
 
   const comparePrices = async () => {
     const updatedUserRes = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}api/getUpdatedUser/${user.id}`
+      `/api/getUpdatedUser/${user.id}`
     );
     const updatedUser = await updatedUserRes.json();
 
     const fetchedData = await Promise.all(
       updatedUser.userValues.map(async (userValue) => {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}${userValue.isin}`
+          `https://api.divvydiary.com/symbols/${userValue.isin}`
         );
         if (!res.ok) {
           return null;
@@ -43,14 +43,14 @@ const GetStockPrice = async ({ user }) => {
             user.price
           )} erreicht.`,
         };
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/send-push`, {
+        await fetch(`/api/send-push`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ subscription: user.subscriptions, payload }),
         });
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/updateAlarm`, {
+        await fetch(`/api/updateAlarm`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
