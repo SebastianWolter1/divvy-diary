@@ -10,19 +10,19 @@ Web Push
 Next Auth
 Divvy Diary API
 
-# Landing Page:
+### Landing Page:
 The user can choose to register or login, also can switch light and dark theme
 and click the links to DivvyDiary HP and my Github profile.
 
-# Login Form:
+### Login Form:
 Choose to login with email and password -validated-, go to register form 
 or click the links or theme switch, home leads back to landingpage.
 
-# Register Form
+### Register Form
 Choose to register with Email, Name and Password -validated-, switch to login form
 or click the links or theme switch, home leads back to landingpage.
 
-# Dashboard
+### Dashboard
 After logging in you get forwarded to your dashboard. The Welcome {Username} leads back to landingpage.
 You see your price alarms -when set- and below a form to add alarms. 
 The list shows name, price, isin and a delete button for each alarm.
