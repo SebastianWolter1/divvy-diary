@@ -24,7 +24,7 @@ export const getCurrentUser = async () => {
 };
 
 export const getStockName = async (isin) => {
-  const res = await fetch(`https://api.divvydiary.com/symbols/${isin}`);
+  const res = await fetch(`${process.env.API_URL}${isin}`);
   const data = await res.json();
   return data.name;
 };
@@ -36,7 +36,7 @@ const Dashboard = async () => {
     return (
       <>
         <div className="bg-gray-600 dark:bg-gray-900 h-screen p-6 text-gray-300 dark:text-white flex flex-col items-center justify-start space-y-4">
-          <h3 className="mb-4 text-xl font-bold text-center">
+          <h3 className="my-4 text-xl font-bold">
             Du bist nicht eingeloggt...
           </h3>
           <Cta type="login" className="mb-2" />
@@ -74,36 +74,36 @@ const Dashboard = async () => {
                     <p>Name</p>
                     <p>Preisalarm</p>
                   </div>
-                  {
-                     user.userValues.map(async (userValue, index) => {
-                        const stockName = await getStockName(userValue.isin);
-                        return (
-                          <React.Fragment key={userValue.id}>
-                            <div
-                              className={`text-center w-full grid grid-cols-3 gap-2 items-center rounded text-white mb-2 ${
-                                index % 2 === 0
-                                  ? "bg-gray-600 dark:bg-gray-800"
-                                  : ""
-                              }`}
-                            >
-                              <div>
-                                <p className="text-orange-500 font-semibold">{stockName}</p>
-                                <p className="text-[10px] text-gray-300 dark:text-white">
-                                  {userValue.isin}
-                                </p>
-                              </div>
-                              <p className="text-xs text-gray-300 dark:text-white ">
-                                {formatCurrency(userValue.price)}
-                              </p>
-                              <div>
-                                <Cta type="deleteForm" id={userValue.id} />
-                              </div>
-                            </div>
-                          </React.Fragment>
-                        );
-                      })
-                    }
-                    <GetStockPrice user={user} />
+                  {user.userValues.map(async (userValue, index) => {
+                    const stockName = await getStockName(userValue.isin);
+                    return (
+                      <React.Fragment key={userValue.id}>
+                        <div
+                          className={`text-center w-full grid grid-cols-3 gap-2 items-center rounded text-white mb-2 ${
+                            index % 2 === 0
+                              ? "bg-gray-600 dark:bg-gray-800"
+                              : ""
+                          }`}
+                        >
+                          <div>
+                            <p className="text-orange-500 font-semibold">
+                              {stockName}
+                            </p>
+                            <p className="text-[10px] text-gray-300 dark:text-white">
+                              {userValue.isin}
+                            </p>
+                          </div>
+                          <p className="text-xs text-gray-300 dark:text-white ">
+                            {formatCurrency(userValue.price)}
+                          </p>
+                          <div>
+                            <Cta type="deleteForm" id={userValue.id} />
+                          </div>
+                        </div>
+                      </React.Fragment>
+                    );
+                  })}
+                  <GetStockPrice user={user} />
                 </div>
               </div>
             </div>

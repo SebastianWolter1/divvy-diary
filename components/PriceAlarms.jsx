@@ -33,7 +33,6 @@ const PriceAlarmForm = ({ user }) => {
           "Content-Type": "application/json",
         },
       });
-
       setAlert({ status: "success", message: "Preisalarm hinzugefügt" });
       setTimeout(() => {
         setAlert({ status: "", message: "" });
@@ -46,7 +45,6 @@ const PriceAlarmForm = ({ user }) => {
       });
     }
   };
-
   return (
     <>
       {alert.message && (
@@ -60,7 +58,6 @@ const PriceAlarmForm = ({ user }) => {
           {alert.status === "success" ? "✅" : "❌"} {alert.message}
         </div>
       )}
-
       <div className="p-6">
         <div className="mx-auto my-12 w-full px-4">
           <div className="align-middle inline-block min-w-full rounded-lg  bg-gray-500 dark:bg-gray-700 max-w-full">
@@ -97,7 +94,6 @@ const PriceAlarmForm = ({ user }) => {
                       </span>
                     )}
                   </div>
-
                   <div className="mb-4">
                     <label
                       className="block text-gray-300 dark:text-white text-sm font-bold mb-2"
@@ -125,7 +121,6 @@ const PriceAlarmForm = ({ user }) => {
                       </span>
                     )}
                   </div>
-
                   <Cta type="submitForm" />
                 </form>
               </div>
