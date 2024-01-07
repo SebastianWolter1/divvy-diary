@@ -26,8 +26,8 @@ or click the links or theme switch, home leads back to landingpage.
 After logging in you get forwarded to your dashboard. The Welcome {Username} leads back to landingpage.
 You see your price alarms -when set- and below a form to add alarms. 
 The list shows name, price, isin and a delete button for each alarm.
-You can switch on and off notifications or logout. logout leads back to landingpage.
-When notifications are switched on and allowed by the browser you will be noticed when an alarms hits.
+You can switch on and off notifications or logout. Logout leads back to landingpage.
+When notifications are switched on and allowed by the browser you will be noticed when an alarm hits.
 Of course you can click the links or theme switch.
 If you are not logged in and navigating to the dashboard you get the choice to login or register.
 
