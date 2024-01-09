@@ -20,10 +20,11 @@ const GetStockPrice = async ({ user }) => {
         const data = await res.json();
         return {
           fetched: data,
-          user: {
+          userData: {
             ...userValue,
             subscriptions: updatedUser.subscriptions,
             pushed: userValue.pushed,
+            initialPrice: userValue.initialPrice,
           },
         };
       })
@@ -31,16 +32,21 @@ const GetStockPrice = async ({ user }) => {
 
     const validData = fetchedData.filter((item) => item !== null);
 
-    for (const { fetched, user } of validData) {
+    for (const { fetched, userData } of validData) {
+      if (userData.pushed) {
+        continue;
+      }
+      const fetchedPrice = parseFloat(fetched.price.toFixed(2));
+      const userPrice = parseFloat(userData.price.replace(",", "."));
       if (
-        parseFloat(fetched.price.toFixed(2)) ===
-          parseFloat(user.price.replace(",", ".")) &&
-        user.pushed === false
+        (userData.initialPrice === "lower" && fetchedPrice <= userPrice) ||
+        (userData.initialPrice === "higher" && fetchedPrice >= userPrice) ||
+        (userData.initialPrice === "equal" && fetchedPrice === userPrice)
       ) {
         const payload = {
           title: "Preis Alarm",
           body: `${fetched.name} hat deinen Preis von ${formatCurrency(
-            user.price
+            userData.price
           )} erreicht.`,
         };
         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/send-push`, {
@@ -48,16 +54,19 @@ const GetStockPrice = async ({ user }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ subscription: user.subscriptions, payload }),
+          body: JSON.stringify({
+            subscription: userData.subscriptions,
+            payload,
+          }),
         });
         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/updateAlarm`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ id: user.id }),
+          body: JSON.stringify({ id: userData.id }),
         });
-      } 
+      }
     }
 
     setTimeout(comparePrices, 1000 * 60);

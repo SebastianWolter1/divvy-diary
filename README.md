@@ -31,7 +31,7 @@ When notifications are switched on and allowed by the browser you will be notice
 Of course you can click the links or theme switch.
 If you are not logged in and navigating to the dashboard you get the choice to login or register.
 
-## TODO 08.01.2024
+## TODO 09.01.2024
 
 siehe GitHub Issues
 
