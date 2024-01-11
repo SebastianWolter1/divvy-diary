@@ -86,7 +86,7 @@ const LoginForm = () => {
                     />
                     {errors.email && (
                       <span className="text-orange-700 text-xs italic">
-                        This field is required
+                        Dieses Feld ist erforderlich
                       </span>
                     )}
                   </div>
@@ -107,7 +107,7 @@ const LoginForm = () => {
                     />
                     {errors.password && (
                       <span className="text-orange-700 text-xs italic">
-                        This field is required
+                        Dieses Feld ist erforderlich
                       </span>
                     )}
                   </div>

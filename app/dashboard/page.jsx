@@ -7,6 +7,7 @@ import React from "react";
 import Serviceworker from "@/components/ServiceWorker";
 import { formatCurrency } from "@/utils/formatCurrency";
 import GetStockPrice from "@/components/getStockPrice";
+import AlarmsSkeleton from "@/components/AlarmsSkeleton";
 
 export const getCurrentUser = async () => {
   try {
@@ -53,7 +54,7 @@ const Dashboard = async () => {
           <div className="justify-center flex md:hidden mb-4">
             <div className="inline-block text-center">
               <span className="text-2xl text-gray-300 dark:text-white font-semibold">
-                Welcome{" "}
+                Willkommen{" "}
               </span>
 
               <span className="text-3xl text-orange-500 font-semibold">
@@ -63,9 +64,9 @@ const Dashboard = async () => {
           </div>
         ) : null}
         <div>
-          <div className="mx-auto mt-16 w-full">
+          <div className="mx-auto mt-16 w-full px-10">
             <div className="inline-block min-w-full rounded-lg bg-gray-500 dark:bg-gray-700 max-w-full">
-              <div className="flex items-center py-12 px-4">
+              <div className="flex items-center py-12 px-8">
                 <div className="w-full">
                   <h2 className="my-6 text-center text-3xl font-bold leading-9 text-gray-300 dark:text-white mb-4">
                     Deine Preisalarme
@@ -74,7 +75,8 @@ const Dashboard = async () => {
                     <p>Name</p>
                     <p>Preisalarm</p>
                   </div>
-                  {user.userValues.map(async (userValue, index) => {
+                  {user.userValues.length > 0 ? (
+                   user.userValues.map(async (userValue, index) => {
                     const stockName = await getStockName(userValue.isin);
                     return (
                       <React.Fragment key={userValue.id}>
@@ -102,7 +104,9 @@ const Dashboard = async () => {
                         </div>
                       </React.Fragment>
                     );
-                  })}
+                  })):(
+                   <AlarmsSkeleton  />
+                  )}
                   <GetStockPrice user={user} />
                 </div>
               </div>
