@@ -10,7 +10,7 @@ const Navigation = async () => {
   return (
     <nav className="flex justify-between items-center px-6 py-2 bg-gray-700 dark:bg-gray-800 text-white">
       <div className="flex">
-        <Link href="https://www.divvydiary.com/de">
+        <Link href="https://www.divvydiary.com/de" rel="noopener noreferrer" target="_blank">
           <div className="flex items-center">
             <Image src="/logo.svg" width={35} height={35} alt="divvyDiary" />
             <div className="ml-1 text-orange-400 hidden min-[430px]:block">

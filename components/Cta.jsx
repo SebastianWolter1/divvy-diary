@@ -56,6 +56,14 @@ const Cta = ({ type, id }) => {
     await signOut({ callbackUrl: "http://localhost:3000" });
   };
 
+  const buttonTextColor =
+    type === "skeleton"
+      ? "dark:text-gray-400 text-gray-200"
+      : "text-gray-300 dark:text-white";
+
+  const buttonCursor =
+    type === "skeleton" ? "cursor-default" : "cursor-pointer";
+
   const buttonText =
     type === "login"
       ? "Login mit bestehendem Account"
@@ -70,6 +78,8 @@ const Cta = ({ type, id }) => {
       : type === "submitForm"
       ? "Preisalarm erstellen"
       : type === "deleteForm"
+      ? "löschen"
+      : type === "skeleton"
       ? "löschen"
       : type === "subscription"
       ? hasActivePushSubscription
@@ -89,6 +99,8 @@ const Cta = ({ type, id }) => {
     type === "submitForm" ||
     (type === "subscription" && !hasActivePushSubscription)
       ? "bg-orange-700 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-500"
+      : type === "skeleton"
+      ? "bg-gray-300 dark:bg-gray-500"
       : type === "deleteForm" ||
         type === "logout" ||
         (type === "subscription" && hasActivePushSubscription)
@@ -105,11 +117,14 @@ const Cta = ({ type, id }) => {
 
   return (
     <button
-      className={`${buttonColor} text-gray-300 dark:text-white my-2 text-xs md:text-sm  font-medium py-2 md:px-4 px-2 rounded-lg focus:outline-none focus:shadow-outline`}
+      className={`${buttonColor} ${buttonTextColor} ${buttonCursor} my-2 text-xs md:text-sm  font-medium py-2 md:px-4 px-2 rounded-lg focus:outline-none focus:shadow-outline`}
       type={buttonType}
       onClick={buttonAction}
     >
-      {buttonType || type === "logout" || type === "subscription" ? (
+      {buttonType ||
+      type === "logout" ||
+      type === "subscription" ||
+      type === "skeleton" ? (
         buttonText
       ) : (
         <Link href={buttonLink}>{buttonText}</Link>

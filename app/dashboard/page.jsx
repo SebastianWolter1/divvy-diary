@@ -7,6 +7,7 @@ import React from "react";
 import Serviceworker from "@/components/ServiceWorker";
 import { formatCurrency } from "@/utils/formatCurrency";
 import GetStockPrice from "@/components/getStockPrice";
+import AlarmsSkeleton from "@/components/AlarmsSkeleton";
 
 export const getCurrentUser = async () => {
   try {
@@ -74,7 +75,8 @@ const Dashboard = async () => {
                     <p>Name</p>
                     <p>Preisalarm</p>
                   </div>
-                  {user.userValues.map(async (userValue, index) => {
+                  {user.userValues.length > 0 ? (
+                   user.userValues.map(async (userValue, index) => {
                     const stockName = await getStockName(userValue.isin);
                     return (
                       <React.Fragment key={userValue.id}>
@@ -102,7 +104,9 @@ const Dashboard = async () => {
                         </div>
                       </React.Fragment>
                     );
-                  })}
+                  })):(
+                   <AlarmsSkeleton  />
+                  )}
                   <GetStockPrice user={user} />
                 </div>
               </div>
