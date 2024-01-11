@@ -24,7 +24,7 @@ const Navigation = async () => {
           <div className="inline-block text-center">
              <Link href="/dashboard">
             <span className="text-xl text-gray-300 dark:text-white font-semibold">
-              Welcome{" "}
+              Willkommen{" "}
             </span>
             <span className="text-2xl text-orange-500 font-semibold">
              {user.name}

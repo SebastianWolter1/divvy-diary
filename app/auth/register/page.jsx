@@ -125,7 +125,7 @@ const RegisterForm = () => {
                     <input
                       {...register("password", { required: true })}
                       className="shadow bg-gray-400 dark:bg-gray-600 rounded w-full py-2 px-3 text-gray-200 dark:text-white focus:outline-none"
-                      type="text"
+                      type="password"
                       id="password"
                       name="password"
                     />

@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
+import bcrypt from "bcrypt";
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
@@ -20,8 +21,11 @@ export const authOptions = {
 
         if (!user) throw new Error("No user found");
 
-        if (user.password !== credentials?.password)
-          throw new Error("Incorrect password");
+        const valid = await bcrypt.compare(
+          credentials?.password,
+          user.password
+        );
+        if (!valid) throw new Error("Incorrect password");
 
         return user;
       },

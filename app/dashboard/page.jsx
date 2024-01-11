@@ -54,7 +54,7 @@ const Dashboard = async () => {
           <div className="justify-center flex md:hidden mb-4">
             <div className="inline-block text-center">
               <span className="text-2xl text-gray-300 dark:text-white font-semibold">
-                Welcome{" "}
+                Willkommen{" "}
               </span>
 
               <span className="text-3xl text-orange-500 font-semibold">
