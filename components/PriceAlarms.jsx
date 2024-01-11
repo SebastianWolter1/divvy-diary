@@ -22,11 +22,11 @@ const PriceAlarmForm = ({ user }) => {
 
   const onSubmit = async (data) => {
     if (errors.isin) {
-      setAlert({ status: "error", message: "Invalid ISIN" });
+      setAlert({ status: "error", message: "Ungültige ISIN" });
       return;
     }
     try {
-      await fetch("/api/addAlarm", {
+        await fetch("/api/addAlarm", {
         method: "POST",
         body: JSON.stringify({ ...data, userId: user.id }),
         headers: {

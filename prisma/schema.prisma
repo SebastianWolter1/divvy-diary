@@ -20,11 +20,18 @@ model User {
   subscriptions Json? @default("{}")
 }
 
+enum InitialPrice {
+  higher
+  lower
+  equal
+}
+
 model PriceAlarms {
   id     String @id @default(cuid())
   isin   String
   price  String
   userId String
   pushed Boolean @default(false)
+  initialPrice InitialPrice?
   user   User   @relation(fields: [userId], references: [id])
 }
