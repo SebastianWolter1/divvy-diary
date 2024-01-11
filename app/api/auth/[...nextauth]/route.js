@@ -29,7 +29,7 @@ export const authOptions = {
   ],
   debug: process.env.NODE_ENV === "development",
   session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
