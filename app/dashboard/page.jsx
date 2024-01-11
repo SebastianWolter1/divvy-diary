@@ -64,9 +64,9 @@ const Dashboard = async () => {
           </div>
         ) : null}
         <div>
-          <div className="mx-auto mt-16 w-full">
+          <div className="mx-auto mt-16 w-full px-10">
             <div className="inline-block min-w-full rounded-lg bg-gray-500 dark:bg-gray-700 max-w-full">
-              <div className="flex items-center py-12 px-4">
+              <div className="flex items-center py-12 px-8">
                 <div className="w-full">
                   <h2 className="my-6 text-center text-3xl font-bold leading-9 text-gray-300 dark:text-white mb-4">
                     Deine Preisalarme
