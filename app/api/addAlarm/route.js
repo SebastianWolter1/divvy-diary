@@ -11,12 +11,14 @@ export async function POST(request) {
       return null;
     }
     const result = await res.json();
-    const stockPrice = result.price.toFixed(2);
+    const stockPrice = parseFloat(result.price.toFixed(2));
+    const userPrice = parseFloat(body.price.replace(",", "."));
+    console.log(stockPrice, userPrice );
 
   let initialPrice =
-   stockPrice > body.price.replace(",", ".")
+   stockPrice > userPrice
         ? "lower"
-        : stockPrice < body.price.replace(",", ".")
+        : stockPrice < userPrice
         ? "higher"
         : "equal";
 
