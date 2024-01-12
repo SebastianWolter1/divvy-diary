@@ -99,7 +99,7 @@ const PriceAlarmForm = ({ user }) => {
                       className="block text-gray-300 dark:text-white text-sm font-bold mb-2"
                       htmlFor="price"
                     >
-                      Preis in USD
+                      Preis in EUR
                     </label>
                     <input
                       {...register("price", {
