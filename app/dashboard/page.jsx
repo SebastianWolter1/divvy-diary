@@ -6,7 +6,6 @@ import PriceAlarm from "@/components/PriceAlarms";
 import React from "react";
 import Serviceworker from "@/components/ServiceWorker";
 import { formatCurrency } from "@/utils/formatCurrency";
-import GetStockPrice from "@/components/getStockPrice";
 import AlarmsSkeleton from "@/components/AlarmsSkeleton";
 
 export const getCurrentUser = async () => {
@@ -107,7 +106,6 @@ const Dashboard = async () => {
                   })):(
                    <AlarmsSkeleton  />
                   )}
-                  <GetStockPrice user={user} />
                 </div>
               </div>
             </div>
