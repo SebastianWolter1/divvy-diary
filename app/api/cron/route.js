@@ -1,11 +1,8 @@
-export async function GET(request) {
-  return new Response("Hello workkkld!"  )
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  return NextResponse.json({ ok: true });
 }
-
-
-
-
-
 
 // import { formatCurrency } from "@/utils/formatCurrency";
 
@@ -74,7 +71,6 @@ export async function GET(request) {
 //         });
 //       }
 //     }
-    
+
 //   }
 //   comparePrices();
-    
