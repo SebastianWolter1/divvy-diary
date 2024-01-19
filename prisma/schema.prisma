@@ -29,7 +29,7 @@ enum InitialPrice {
 model PriceAlarms {
   id     String @id @default(cuid())
   isin   String
-  price  String
+  price  Float
   userId String
   pushed Boolean @default(false)
   initialPrice InitialPrice?

@@ -12,8 +12,7 @@ export async function POST(request) {
     }
     const result = await res.json();
     const stockPrice = parseFloat(result.price.toFixed(2));
-    const userPrice = parseFloat(body.price.replace(",", "."));
-    console.log(stockPrice, userPrice );
+    const userPrice = parseFloat(body.price);
 
   let initialPrice =
    stockPrice > userPrice
@@ -23,7 +22,7 @@ export async function POST(request) {
         : "equal";
 
     const priceAlarm = await prisma.priceAlarms.create({
-      data: { isin, price, userId, initialPrice },
+      data: { isin, price: userPrice, userId, initialPrice },
     });
     return NextResponse.json(priceAlarm);
   } catch (error) {

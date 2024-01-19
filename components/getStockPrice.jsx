@@ -37,7 +37,7 @@ const GetStockPrice = async ({ user }) => {
         continue;
       }
       const fetchedPrice = parseFloat(fetched.price.toFixed(2));
-      const userPrice = parseFloat(userData.price.replace(",", "."));
+      const userPrice = parseFloat(userData.price);
       if (
         (userData.initialPrice === "lower" && fetchedPrice <= userPrice) ||
         (userData.initialPrice === "higher" && fetchedPrice >= userPrice) ||
