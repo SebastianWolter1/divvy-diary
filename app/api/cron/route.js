@@ -1,6 +1,9 @@
 import { formatCurrency } from "@/utils/formatCurrency";
 
-export const comparePrices = async () => {
+export function GET () {
+
+
+const comparePrices = async () => {
   const usersRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/getAllUsers`);
   const users = await usersRes.json();
 
@@ -64,12 +67,14 @@ export const comparePrices = async () => {
     }
   }
 }
+comparePrices();
+}
 
 export default async function handler(req, res) {
-  // if (req.method === 'GET') {
-    await comparePrices();
+  if (req.method === 'GET') {
+    GET();
     res.status(200).json({ message: 'Price comparison completed' });
-  // } else {
-    // res.status(405).json({ message: 'Method not allowed' });
-  // }
+  } else {
+    res.status(405).json({ message: 'Method not allowed' });
+  }
 }
