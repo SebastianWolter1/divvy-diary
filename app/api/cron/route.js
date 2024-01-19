@@ -65,11 +65,4 @@ export const comparePrices = async () => {
   }
 }
 
-export default async function handler(req, res) {
-  if (req.method === 'GET') {
-    await comparePrices();
-    res.status(200).json({ message: 'Price comparison completed' });
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
-  }
-}
+comparePrices();
