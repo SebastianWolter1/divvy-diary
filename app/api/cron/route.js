@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/utils/formatCurrency";
 
-export function GET () {
+export async function GET () {
 
 
 const comparePrices = async () => {
@@ -68,13 +68,6 @@ const comparePrices = async () => {
   }
 }
 comparePrices();
+return new Response( "Price comparison completed" );
 }
 
-export default async function handler(req, res) {
-  if (req.method === 'GET') {
-    GET();
-    res.status(200).json({ message: 'Price comparison completed' });
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
-  }
-}
