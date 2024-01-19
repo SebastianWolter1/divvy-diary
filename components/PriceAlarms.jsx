@@ -102,19 +102,16 @@ const PriceAlarmForm = ({ user }) => {
                       Preis in EUR
                     </label>
                     <input
-                      {...register("price", {
-                        required: "Dieses Feld ist erforderlich",
-                        pattern: {
-                          value: /^\d+,\d{2}$/,
-                          message:
-                            "Bitte geben Sie einen gültigen Wert ein, z.B. (123,45)",
-                        },
-                      })}
-                      className="shadow bg-gray-400 dark:bg-gray-600 rounded w-full py-2 px-3 text-gray-200 dark:text-white focus:outline-none"
-                      type="text"
-                      id="price"
-                      name="price"
-                    />
+    {...register("price", {
+      required: 'Bitte geben Sie einen gültigen Wert ein, (z.B. 123.45 oder 2,9)',
+      validate: value => !isNaN(value),
+    })}
+    className="shadow bg-gray-400 dark:bg-gray-600 rounded w-full py-2 px-3 text-gray-200 dark:text-white focus:outline-none"
+    type="number"
+    step="0.01"
+    id="price"
+    name="price"
+  />
                     {errors.price && (
                       <span className="text-orange-700 text-xs italic">
                         {errors.price.message}
