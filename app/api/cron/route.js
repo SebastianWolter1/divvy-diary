@@ -72,7 +72,7 @@ export async function GET() {
     }
   };
   try {
-    const response = comparePrices();
+    const response = await comparePrices();
     return NextResponse.json({response, status: 200});
   } catch (error) {
     return NextResponse.error({ status: 500 });
